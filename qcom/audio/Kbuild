@@ -1,13 +1,21 @@
 DTC_INCLUDE += $(srctree)/../sm8450-modules/qcom/opensource/audio-kernel/include
 KBUILD_DTC_INCLUDE += $(srctree)/../sm8450-modules/qcom/opensource/audio-kernel/include
 
-dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+ifeq ($(CONFIG_ARCH_WAIPIO), y)
+dtbo-y += waipio-audio.dtbo
+ifneq ($(CONFIG_MACH_SONY_DEVICE), y)
+dtbo-y += \
                  waipio-audio-cdp.dtbo \
                  waipio-audio-mtp.dtbo \
                  waipio-audio-qrd.dtbo \
                  waipio-audio-atp.dtbo \
                  waipio-audio-rumi.dtbo \
                  waipio-audio-hdk.dtbo
+endif # CONFIG_MACH_SONY_DEVICE
+dtb-y += waipio-audio.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX223) += somc-nagara-audio-pdx223.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX224) += somc-nagara-audio-pdx224.dtbo
+endif
 
 dtbo-$(CONFIG_ARCH_DIWALI) += diwali-audio.dtbo \
                  diwali-audio-idp.dtbo \

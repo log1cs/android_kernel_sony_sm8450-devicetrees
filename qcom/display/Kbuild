@@ -13,7 +13,9 @@ dtbo-$(CONFIG_ARCH_NEO) += display/neo-sde.dtbo \
 endif
 
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
-dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo
+ifneq ($(CONFIG_MACH_SONY_DEVICE), y)
+dtbo-$(CONFIG_ARCH_WAIPIO) += \
 		display/waipio-sde-display-mtp-overlay.dtbo \
 		display/waipio-sde-display-cphy-mtp-overlay.dtbo \
 		display/waipio-sde-display-mtp-68disp-overlay.dtbo \
@@ -23,6 +25,10 @@ dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
 		display/waipio-sde-display-waipio-lemur-cdp-overlay.dtbo \
 		display/waipio-sde-display-waipio-lemur-mtp-overlay.dtbo \
 		display/waipio-sde-display-rumi-overlay.dtbo
+endif # CONFIG_MACH_SONY_DEVICE
+dtb-$(CONFIG_MACH_SONY_DEVICE) += display/waipio-sde.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX223) += display/waipio-sde-display-pdx223-overlay.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX224) += display/waipio-sde-display-pdx224-overlay.dtbo
 else
 dtbo-$(CONFIG_ARCH_WAIPIO) += display/trustedvm-waipio-sde-display-mtp-overlay.dtbo \
 		display/trustedvm-waipio-sde-display-cdp-overlay.dtbo \
