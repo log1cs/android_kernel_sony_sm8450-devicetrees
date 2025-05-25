@@ -1,0 +1,8 @@
+dtbo-$(CONFIG_ARCH_WAIPIO) += ../display/waipio-sde.dtbo
+
+dtbo-$(CONFIG_MACH_SONY_PDX223) += waipio-sde-display-pdx223-overlay.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX224) += waipio-sde-display-pdx224-overlay.dtbo
+
+always-y	:= $(dtbo-y) $(dtb-y)
+subdir-y	:= $(dts-dirs)
+clean-files	:= *.dtb *.dtbo
