@@ -1,0 +1,10 @@
+DTC_INCLUDE += $(srctree)/../sm8450-modules/qcom/opensource/audio-kernel/include
+KBUILD_DTC_INCLUDE += $(srctree)/../sm8450-modules/qcom/opensource/audio-kernel/include
+
+dtbo-$(CONFIG_ARCH_WAIPIO) += ../waipio-audio.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX223) += somc-nagara-audio-pdx223.dtbo
+dtbo-$(CONFIG_MACH_SONY_PDX224) += somc-nagara-audio-pdx224.dtbo
+
+always-y    := $(dtb-y) $(dtbo-y)
+subdir-y    := $(dts-dirs)
+clean-files    := *.dtb *.dtbo
