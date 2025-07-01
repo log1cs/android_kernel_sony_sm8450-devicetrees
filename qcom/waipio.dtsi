@@ -16,12 +16,23 @@
 	qcom,msm-id = <457 0x10000>;
 	interrupt-parent = <&intc>;
 
-	#address-cells = <2>;
-	#size-cells = <2>;
+        #address-cells = <2>;
+        #size-cells = <2>;
 
 	chosen: chosen {
-		bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 swiotlb=noforce loop.max_part=7 cgroup.memory=nokmem,nosocket pcie_ports=compat service_locator.enable=1 msm_rtb.filter=0x237 allow_mismatched_32bit_el0 cpufreq.default_governor=performance pelt=8 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 irqaffinity=0-3 ftrace_dump_on_oops pstore.compress=none fsa4480_i2c.async_probe=1 can.stats_timer=0 slub_debug=- allow_file_spec_access";
-		stdout-path = "/soc/qcom,qup_uart@99c000:115200n8";
+			ranges;
+
+			bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 swiotlb=noforce loop.max_part=7 cgroup.memory=nokmem,nosocket pcie_ports=compat service_locator.enable=1 msm_rtb.filter=0x237 allow_mismatched_32bit_el0 cpufreq.default_governor=performance pelt=8 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 irqaffinity=0-3 ftrace_dump_on_oops pstore.compress=none fsa4480_i2c.async_probe=1 can.stats_timer=0 slub_debug=- allow_file_spec_access earlycon=simplefb,0xb8000000,1096,2560";
+			stdout-path = "framebuffer";
+			framebuffer: framebuffer@b8000000 {
+				compatible = "simple-framebuffer";
+				reg = <0x00 0xb8000000 0x00 0x02b00000>;
+				width = <1096>;
+				height = <2560>;
+				stride = <(1096 * 4)>;
+				format = "a8r8g8b8";
+				status = "okay";
+			};
 	};
 
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
